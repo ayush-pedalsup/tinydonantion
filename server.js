@@ -44,7 +44,8 @@ app.get(
     failureRedirect: "/a/auth/google/failure",
   })
 );
-app.use("/a", routes);
+app.use("/mobile", routes);
+app.use("/admin",routes)
 
 app.listen(3000, () => {
   console.log("Listening on port 3000");

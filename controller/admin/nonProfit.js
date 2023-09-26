@@ -1,38 +1,5 @@
-const { handleError, sendres } = require("../utils/helper");
-const { NonProfit } = require("../models/NonProfit");
-
-const add = async (req, res) => {
-  try {
-    const { name, summary, url, logo } = req.body;
-    let member = await NonProfit.create({ name, summary, url, logo });
-    if (member) {
-      member = member.sanitize();
-      return sendres(201, { member }, res);
-    }
-    return sendres(400, { message: "Not able to save the data" }, res);
-  } catch (err) {
-    handleError(err, res);
-  }
-};
-
-const update = async (req, res) => {
-  try {
-    const { name, summary, url, logo } = req.body;
-    if (name) {
-      const member = await NonProfit.updateOne(
-        { name },
-        { $set: { summary, url, logo } },
-        { new: true }
-      ).exec();
-      if (member) {
-        return sendres(201, { message: "Successfully Updated" }, res);
-      }
-      return sendres(400, { message: "User not found" }, res);
-    }
-  } catch (err) {
-    handleError(err, res);
-  }
-};
+const { handleError, sendres } = require("../../utils/helper");
+const { NonProfit } = require("../../models/NonProfit");
 
 const remove = async (req, res) => {
   try {
@@ -47,7 +14,7 @@ const remove = async (req, res) => {
       }
       return sendres(
         400,
-        { message: "Non Profit organization with same name is not registered" },
+        { message: "Non Profit organization with this name is not registered" },
         res
       );
     }
@@ -67,12 +34,12 @@ const getOne = async (req, res) => {
     if (name) {
       let findMember = await NonProfit.findOne({ name });
       if (findMember) {
-        findMember=findMember.sanitize()
+        findMember = findMember.sanitize();
         return sendres(201, { findMember }, res);
       }
       return sendres(
         400,
-        { message: "Non Profit organization with same name is not registered" },
+        { message: "Non Profit organization with this name is not registered" },
         res
       );
     }
@@ -97,9 +64,25 @@ const getAll = async (req, res) => {
     handleError(err, res);
   }
 };
-
+const update = async (req, res) => {
+  try {
+    const { name, summary, url, logo } = req.body;
+    if (name) {
+      const member = await NonProfit.updateOne(
+        { name },
+        { $set: { summary, url, logo } },
+        { new: true }
+      ).exec();
+      if (member) {
+        return sendres(201, { message: "Successfully Updated" }, res);
+      }
+      return sendres(400, { message: "User not found" }, res);
+    }
+  } catch (err) {
+    handleError(err, res);
+  }
+};
 module.exports = {
-  add,
   update,
   remove,
   getOne,

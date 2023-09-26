@@ -18,6 +18,10 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    isRestricted:{
+      type:Boolean,
+      default:false
+    }
   },
   {
     collection: "Users",
@@ -37,4 +41,4 @@ userSchema.methods.sanitize = function () {
 
 const User = mongoose.model("Users", userSchema);
 
-module.exports = User;
+module.exports = {User};

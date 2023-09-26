@@ -5,6 +5,7 @@ const nonProfitSchema = new Schema(
   {
     name: {
       type: String,
+      unique: true,
       required: true,
     },
     summary: {
@@ -34,4 +35,4 @@ nonProfitSchema.methods.sanitize = function () {
 
 const NonProfit = mongoose.model("NonProfits", nonProfitSchema);
 
-module.exports = {NonProfit};
+module.exports = { NonProfit };

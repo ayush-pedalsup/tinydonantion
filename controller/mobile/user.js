@@ -1,6 +1,6 @@
-const { handleError, sendres } = require("../utils/helper");
+const { handleError, sendres } = require("../../utils/helper");
 const passport = require("passport");
-const User = require("../models/User");
+const User = require("../../models/User");
 
 const authFailure = async (req, res) => {
   try {
@@ -23,6 +23,16 @@ const initialize = async (req, res) => {
 const authProtected = async (req, res) => {
   try {
     let name = req.user.displayName;
+    let email = req.user.email;
+    if (email) {
+      const findUser = await User.findOne({ email });
+      if (findUser) {
+        const status = findUser._doc.isRestricted;
+        if (status) {
+          return sendres(400, { message: "The user is restricted" }, res);
+        }
+      }
+    }
     return sendres(200, { message: `Hello ${name}` }, res);
   } catch (err) {
     handleError(err, res);
@@ -79,7 +89,26 @@ const getAllUser = async (req, res) => {
   }
 };
 
-
+const restrictUser = async (req, res) => {
+  try {
+    const { email } = req.body;
+    if (email) {
+      const findUser = await User.findOne({ email });
+      if (findUser) {
+        await User.updateOne(
+          { email },
+          { $set: { isRestricted: true } },
+          { new: true }
+        ).exec();
+        return sendres(200, { message: "User Sucessfully restricted" }, res);
+      }
+      return sendres(400, { message: "User not found" }, res);
+    }
+    return sendres(400, { message: "email is required" }, res);
+  } catch (err) {
+    handleError(err, res);
+  }
+};
 
 module.exports = {
   authFailure,
@@ -89,4 +118,5 @@ module.exports = {
   authenticate,
   getUser,
   getAllUser,
+  restrictUser,
 };
