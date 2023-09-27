@@ -14,6 +14,7 @@ const donationSchema = new Schema(
     timestamps: {
       type: Date,
       required: true,
+      default: Date.now,
     },
     tributeName: {
       type: String,
@@ -32,6 +33,11 @@ const donationSchema = new Schema(
       required: true,
     },
     transferStatus: {
+      type: String,
+      required: true,
+      default: "not transferred",
+    },
+    donatorEmail: {
       type: String,
       required: true,
     },

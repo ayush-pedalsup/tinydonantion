@@ -82,9 +82,25 @@ const update = async (req, res) => {
     handleError(err, res);
   }
 };
+
+const add = async (req, res) => {
+  try {
+    const { name, summary, url, logo } = req.body;
+    let member = await NonProfit.create({ name, summary, url, logo });
+    if (member) {
+      member = member.sanitize();
+      return sendres(201, { member }, res);
+    }
+    return sendres(400, { message: "Not able to save the data" }, res);
+  } catch (err) {
+    handleError(err, res);
+  }
+};
+
 module.exports = {
   update,
   remove,
   getOne,
   getAll,
+  add,
 };
