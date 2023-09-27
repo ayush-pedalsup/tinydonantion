@@ -12,6 +12,7 @@ const {
   getDonationByUser,
   changeTransactionStatus,
   getAllUsersByDonation,
+  getUsersWithoutDonations,
 } = require("../../controller/admin/transaction");
 
 const {
@@ -36,7 +37,8 @@ module.exports = (router) => {
   router.get("/getDonation", getDonation);
   router.get("/getDonationByUser", getDonationByUser);
   router.post("/changeTransactionStatus", changeTransactionStatus);
-  router.post("/getAllUsersByDonation", getAllUsersByDonation);
+  router.get("/getAllUsersByDonation", getAllUsersByDonation);
+  router.get("/getUsersWithoutDonations", getUsersWithoutDonations);
 
   router.get("/getUser", getUser);
   router.get("/getAllUser", getAllUser);

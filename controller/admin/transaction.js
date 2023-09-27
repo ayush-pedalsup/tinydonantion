@@ -1,5 +1,6 @@
 const { handleError, sendres } = require("../../utils/helper");
 const { Donation } = require("../../models/donation");
+const { User } = require("../../models/User");
 
 const getDonation = async (req, res) => {
   try {
@@ -100,10 +101,34 @@ const getAllUsersByDonation = async (req, res) => {
   }
 };
 
+const getUsersWithoutDonations = async (req, res) => {
+  try {
+    const uniqueDonatorEmails = await Donation.aggregate([
+      {
+        $group: {
+          _id: "$donatorEmail",
+        },
+      },
+    ]);
+    const uniqueEmails = uniqueDonatorEmails.map((entry) => entry._id);
+    const allUsers = await User.find({});
+    const usersWithoutDonations = allUsers.filter(
+      (user) => !uniqueEmails.includes(user.email)
+    );
+    if (usersWithoutDonations.length > 0) {
+      return sendres(200, { usersWithoutDonations }, res);
+    }
+    return sendres(400, { message: "No users found without donations" }, res);
+  } catch (err) {
+    handleError(err, res);
+  }
+};
+
 module.exports = {
   getDonation,
   getAllDonation,
   getDonationByUser,
   changeTransactionStatus,
   getAllUsersByDonation,
+  getUsersWithoutDonations,
 };
