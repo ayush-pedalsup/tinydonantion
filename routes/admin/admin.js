@@ -20,6 +20,7 @@ const {
   restrictUser,
   updateUser,
 } = require("../../controller/admin/user");
+const { isAuthorized } = require("../../middleware/isAuthorized");
 
 const { signin, signup } = require("../../controller/admin/admin");
 module.exports = (router) => {
@@ -29,7 +30,7 @@ module.exports = (router) => {
   router.delete("/removeNonProfit", remove);
   router.get("/getNonProfit", getOne);
   router.get("/getAllNonProfit", getAll);
-  router.post("/addNonProfit",add);
+  router.post("/addNonProfit", add);
 
   router.get("/getAllDonation", getAllDonation);
   router.get("/getDonation", getDonation);
