@@ -30,7 +30,8 @@ const remove = async (req, res) => {
 
 const getOne = async (req, res) => {
   try {
-    const { name } = req.body;
+    const name = req.params.id
+    console.log(name);
     if (name) {
       let findMember = await NonProfit.findOne({ name });
       if (findMember) {

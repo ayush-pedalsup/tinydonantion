@@ -29,7 +29,7 @@ module.exports = (router) => {
 
   router.post("/updateNonProfit", update);
   router.delete("/removeNonProfit", remove);
-  router.get("/getNonProfit", getOne);
+  router.get("/getNonProfit/:id", getOne);
   router.get("/getAllNonProfit", getAll);
   router.post("/addNonProfit", add);
 
