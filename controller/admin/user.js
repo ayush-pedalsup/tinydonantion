@@ -1,5 +1,5 @@
 const { handleError, sendres } = require("../../utils/helper");
-const {User}  = require("../../models/User");
+const User = require("../../models/User");
 
 const getUser = async (req, res) => {
   try {
@@ -11,7 +11,7 @@ const getUser = async (req, res) => {
       }
       return sendres(
         400,
-        { message: "User with the registered email not find" },
+        { message: "User with the registered email not found" },
         res
       );
     }
@@ -24,7 +24,7 @@ const getUser = async (req, res) => {
 const getAllUser = async (req, res) => {
   try {
     const findAllUser = await User.find({});
-    console.log("ehhlo")
+    console.log("ehhlo");
     if (findAllUser) {
       return sendres(200, { findAllUser }, res);
     }

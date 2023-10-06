@@ -1,6 +1,6 @@
 const { handleError, sendres } = require("../../utils/helper");
 const { Donation } = require("../../models/donation");
-const { User } = require("../../models/User");
+const User  = require("../../models/User");
 
 const getDonation = async (req, res) => {
   try {

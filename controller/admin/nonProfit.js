@@ -30,7 +30,7 @@ const remove = async (req, res) => {
 
 const getOne = async (req, res) => {
   try {
-    const name = req.params.id
+    const name = req.params.id;
     console.log(name);
     if (name) {
       let findMember = await NonProfit.findOne({ name });
@@ -69,7 +69,7 @@ const update = async (req, res) => {
   try {
     const { name, summary, url, logo } = req.body;
     if (name) {
-      const member = await NonProfit.updateOne(
+      const member = await NonProfit.findOneAndUpdate(
         { name },
         { $set: { summary, url, logo } },
         { new: true }

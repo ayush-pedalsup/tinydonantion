@@ -31,6 +31,7 @@ const getAllDonation = async (req, res) => {
     handleError(err, res);
   }
 };
+
 const uploadTribute = (req, res) => {
   try {
     let file = req.file;

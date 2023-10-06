@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "mocha test/admin.js"
   },
   "author": "pedalsup",
   "license": "ISC",
@@ -13,6 +14,7 @@
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "bucket": "^0.0.1",
+    "chai-http": "^4.4.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
@@ -25,6 +27,11 @@
     "passport-google-oauth2": "^0.2.0",
     "passport-google-oauth20": "^2.0.0",
     "path": "^0.12.7",
-    "razorpay": "^2.9.2"
+    "razorpay": "^2.9.2",
+    "supertest": "^6.3.3"
+  },
+  "devDependencies": {
+    "chai": "^4.3.10",
+    "mocha": "^10.2.0"
   }
 }

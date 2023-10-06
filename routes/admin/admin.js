@@ -34,8 +34,8 @@ module.exports = (router) => {
   router.post("/addNonProfit", add);
 
   router.get("/getAllDonation", getAllDonation);
-  router.get("/getDonation", getDonation);
-  router.get("/getDonationByUser", getDonationByUser);
+  router.post("/getDonation", getDonation);
+  router.post("/getDonationByUser", getDonationByUser);
   router.post("/changeTransactionStatus", changeTransactionStatus);
   router.get("/getAllUsersByDonation", getAllUsersByDonation);
   router.get("/getUsersWithoutDonations", getUsersWithoutDonations);

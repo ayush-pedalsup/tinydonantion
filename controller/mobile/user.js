@@ -68,7 +68,7 @@ const getUser = async (req, res) => {
       }
       return sendres(
         400,
-        { message: "User with the registered email not find" },
+        { message: "User with the registered email not found" },
         res
       );
     }

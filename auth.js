@@ -15,6 +15,19 @@ passport.use(
       console.log("Google Profile:", profile);
       const { given_name, family_name, sub, email } = profile;
       if (email) {
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+          await User.findOneAndUpdate(
+            { email },
+            {
+              firstName: given_name,
+              lastName: family_name,
+              socialAuth: sub,
+              email,
+            }
+          );
+          return done(null, profile);
+        }
         await User.create({
           firstName: given_name,
           lastName: family_name,
@@ -22,7 +35,7 @@ passport.use(
           email,
         });
       }
-      done(null, profile);
+      return done(null, profile);
     }
   )
 );

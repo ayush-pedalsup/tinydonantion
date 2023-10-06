@@ -19,7 +19,7 @@ const update = async (req, res) => {
   try {
     const { name, summary, url, logo } = req.body;
     if (name) {
-      const member = await NonProfit.updateOne(
+      const member = await NonProfit.findOneAndUpdate(
         { name },
         { $set: { summary, url, logo } },
         { new: true }
@@ -117,5 +117,5 @@ module.exports = {
   remove,
   getOne,
   getAll,
-  uploadlogo
+  uploadlogo,
 };
