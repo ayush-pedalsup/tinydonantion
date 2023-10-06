@@ -77,7 +77,7 @@ app.use("/admin", routes);
 // console.log(connection_string);
 
 mongoose
-  .connect("mongodb://localhost:27017/tinyDonation", {
+  .connect("mongodb+srv://ayushpandey:nBR3Z4GUfSfsaBYz@tinydonation.l1otykk.mongodb.net/", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
