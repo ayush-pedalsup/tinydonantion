@@ -21,6 +21,7 @@ const {
   restrictUser,
   updateUser,
 } = require("../../controller/admin/user");
+
 const { isAuthorized } = require("../../middleware/isAuthorized");
 
 const { signin, signup } = require("../../controller/admin/admin");

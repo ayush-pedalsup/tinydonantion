@@ -8,7 +8,19 @@ const { Admin } = require("../../models/admin");
 const signup = async (req, res) => {
   try {
     const { name, email, password, mobileNumber } = req.body;
+
+    if (!name || !email || !password || !mobileNumber) {
+      return sendres(400, { message: "All fields are required" }, res);
+    }
     const hashedPassword = await bcrypt.hash(password, 10);
+    const isUser = await Admin.find({ email });
+    if (isUser) {
+      return sendres(
+        400,
+        { message: "User with the same email already exist" },
+        res
+      );
+    }
     const newAdmin = new Admin({
       name,
       email,
@@ -25,6 +37,9 @@ const signup = async (req, res) => {
 const signin = async (req, res) => {
   try {
     const { email, password } = req.body;
+    if (!password) {
+      return sendres(400, { message: "Password is required" }, res);
+    }
     const checkIfExisting = await Admin.findOne({ email });
     if (checkIfExisting) {
       const isPasswordSame = bcrypt.compareSync(
@@ -39,7 +54,7 @@ const signin = async (req, res) => {
         const token = jwt.sign(payload, process.env.secret_key, {
           expiresIn: "1d",
         });
-        return sendres(200, { message: "Sucessfully Logged In", token }, res);
+        return sendres(200, { message: "successfully Logged In", token }, res);
       }
       return sendres(400, { message: "Incorrect Password" }, res);
     }

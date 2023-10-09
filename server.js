@@ -4,7 +4,8 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const mongoose = require("mongoose");
 const session = require("express-session");
-const routes = require("./routes");
+const routesMobile = require("./routes/mobile");
+const routesAdmin = require("./routes/admin");
 const path = require("path");
 const app = express();
 const { PORT } = require("./config");
@@ -46,8 +47,8 @@ app.get(
     failureRedirect: "/mobile/auth/google/failure",
   })
 );
-app.use("/mobile", routes);
-app.use("/admin", routes);
+app.use("/mobile", routesMobile);
+app.use("/admin", routesAdmin);
 
 // app.listen(PORT, () => {
 //   console.log(`Listening on port ${PORT}`);
@@ -77,10 +78,13 @@ app.use("/admin", routes);
 // console.log(connection_string);
 
 mongoose
-  .connect("mongodb+srv://ayushpandey:nBR3Z4GUfSfsaBYz@tinydonation.l1otykk.mongodb.net/", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(
+    "mongodb+srv://ayushpandey:nBR3Z4GUfSfsaBYz@tinydonation.l1otykk.mongodb.net/",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
   .then(() => {
     console.log("Connected to Database...");
   })

@@ -4,10 +4,31 @@ const { NonProfit } = require("../../models/NonProfit");
 const add = async (req, res) => {
   try {
     const { name, summary, url, logo } = req.body;
+
+    if (!name || !summary || !url || !logo) {
+      return sendres(400, { message: "All fields are required" }, res);
+    }
+    const findNonProfit = await NonProfit.find({ name });
+    if (findNonProfit.length > 0) {
+      return sendres(
+        400,
+        {
+          message:
+            "Non Profit organization with this name is already registered",
+        },
+        res
+      );
+    }
     let member = await NonProfit.create({ name, summary, url, logo });
     if (member) {
       member = member.sanitize();
-      return sendres(201, { member }, res);
+      return sendres(
+        201,
+        {
+          message: `Non Profit organization successfully created`,
+        },
+        res
+      );
     }
     return sendres(400, { message: "Not able to save the data" }, res);
   } catch (err) {
@@ -17,15 +38,25 @@ const add = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const { name, summary, url, logo } = req.body;
+    const { name, newName, summary, url, logo } = req.body;
+
+    if (!name || !summary || !url || !logo) {
+      return sendres(400, { message: "All fields are required" }, res);
+    }
     if (name) {
       const member = await NonProfit.findOneAndUpdate(
         { name },
-        { $set: { summary, url, logo } },
+        { $set: { name: newName, summary, url, logo } },
         { new: true }
       ).exec();
       if (member) {
-        return sendres(201, { message: "Successfully Updated" }, res);
+        return sendres(
+          201,
+          {
+            message: `Non Profit organization with name ${name} successfully updated`,
+          },
+          res
+        );
       }
       return sendres(400, { message: "User not found" }, res);
     }

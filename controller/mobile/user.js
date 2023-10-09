@@ -96,13 +96,13 @@ const restrictUser = async (req, res) => {
           { $set: { isRestricted: true } },
           { new: true }
         ).exec();
-        return sendres(200, { message: "User Sucessfully restricted" }, res);
+        return sendres(200, { message: "User successfully restricted" }, res);
       }
       return sendres(400, { message: "User not found" }, res);
     }
     return sendres(400, { message: "email is required" }, res);
   } catch (err) {
-    handleError(err, res);
+    handleError(err, res);  
   }
 };
 

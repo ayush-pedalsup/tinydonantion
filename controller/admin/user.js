@@ -20,7 +20,6 @@ const getUser = async (req, res) => {
 const getAllUser = async (req, res) => {
   try {
     const findAllUser = await User.find({});
-    console.log("ehhlo");
     if (findAllUser) {
       return sendres(200, { findAllUser }, res);
     }
@@ -54,6 +53,9 @@ const restrictUser = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     const { email, firstName, lastName } = req.body;
+    if (!email || !firstName || !lastName) {
+      return sendres(400, { message: "All fields are required" }, res);
+    }
     if (email) {
       const findUser = await User.findOne({ email });
       if (findUser) {
@@ -62,7 +64,7 @@ const updateUser = async (req, res) => {
           { $set: { email, firstName, lastName } },
           { new: true }
         ).exec();
-        return sendres(200, { message: "User Sucessfully updated" }, res);
+        return sendres(200, { message: "User successfully updated" }, res);
       }
       return sendres(400, { message: "User not found" }, res);
     }

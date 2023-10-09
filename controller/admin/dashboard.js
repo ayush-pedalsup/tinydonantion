@@ -1,7 +1,7 @@
 const { handleError, sendres } = require("../../utils/helper");
 const { Donation } = require("../../models/donation");
 const { NonProfit } = require("../../models/NonProfit");
-const User  = require("../../models/User");
+const User = require("../../models/User");
 
 const dashboard = async (req, res) => {
   try {
