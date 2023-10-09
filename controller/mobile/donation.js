@@ -44,15 +44,40 @@ const uploadTribute = (req, res) => {
     handleError(err, res);
   }
 };
+
 // const saveDonation = async (req, res) => {
 //   try {
-//     const { amount, tributeName } = req.body;
-//     const donation = await Donation.create({ amount, tributeName });
-//     return sendres(200, { message:"donation created" },res);
+//     const {
+//       amount,
+//       tributeName,
+//       nonProfit,
+//       timeStamp,
+//       razorpayPaymentInfo,
+//       tributeImage,
+//       donationStatus,
+//       transferStatus,
+//       donatorEmail,
+//     } = req.body;
+
+//     const donation = await Donation.create({
+//       amount,
+//       tributeName,
+//       nonProfit,
+//       timeStamp,
+//       razorpayPaymentInfo,
+//       tributeImage,
+//       donationStatus,
+//       transferStatus,
+//       donatorEmail,
+//     });
+
+//     return res.status(200).json({ message: "donation created" });
 //   } catch (err) {
 //     handleError(err, res);
 //   }
 // };
+
+
 module.exports = {
   getDonation,
   getAllDonation,
