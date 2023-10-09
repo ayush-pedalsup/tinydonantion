@@ -41,7 +41,7 @@ const authProtected = async (req, res) => {
 const logout = async (req, res) => {
   try {
     req.session.destroy();
-    sendres(201, { message: "See you again" }, res);
+    sendres(200, { message: "See you again" }, res);
   } catch (err) {
     handleError(err, res);
   }

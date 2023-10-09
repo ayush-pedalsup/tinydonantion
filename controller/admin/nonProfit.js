@@ -9,7 +9,7 @@ const remove = async (req, res) => {
       if (findMember) {
         const member = await NonProfit.deleteOne({ name });
         if (member) {
-          return sendres(201, { message: "Successfully removed" }, res);
+          return sendres(200, { message: "Successfully removed" }, res);
         }
       }
       return sendres(
@@ -81,7 +81,7 @@ const update = async (req, res) => {
       ).exec();
       if (member) {
         return sendres(
-          201,
+          200,
           {
             message: `Non Profit organization with name ${name} successfully updated`,
           },
