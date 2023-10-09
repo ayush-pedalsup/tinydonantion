@@ -9,11 +9,7 @@ const getUser = async (req, res) => {
       if (findUser) {
         return sendres(200, { findUser }, res);
       }
-      return sendres(
-        400,
-        { message: "User with the registered email not found" },
-        res
-      );
+      return sendres(400, { message: "User not found" }, res);
     }
     return sendres(400, { message: "email is required" }, res);
   } catch (err) {
@@ -44,7 +40,8 @@ const restrictUser = async (req, res) => {
           { $set: { isRestricted: true } },
           { new: true }
         ).exec();
-        return sendres(200, { message: "User Sucessfully restricted" }, res);
+        req.session.destroy();
+        return sendres(200, { message: "User successfully restricted" }, res);
       }
       return sendres(400, { message: "User not found" }, res);
     }

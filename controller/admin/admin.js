@@ -16,7 +16,7 @@ const signup = async (req, res) => {
       mobileNumber,
     });
     await newAdmin.save();
-    sendres(200, { message: "suceessfully registered" }, res);
+    sendres(200, { message: "successfully registered" }, res);
   } catch (err) {
     handleError(err, res);
   }
