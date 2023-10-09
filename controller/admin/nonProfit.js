@@ -36,7 +36,7 @@ const getOne = async (req, res) => {
       let findMember = await NonProfit.findOne({ name });
       if (findMember) {
         findMember = findMember.sanitize();
-        return sendres(201, { findMember }, res);
+        return sendres(200, { findMember }, res);
       }
       return sendres(
         400,
