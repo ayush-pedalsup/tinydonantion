@@ -14,7 +14,7 @@ const signup = async (req, res) => {
     }
     const hashedPassword = await bcrypt.hash(password, 10);
     const isUser = await Admin.find({ email });
-    if (isUser) {
+    if (isUser.length > 0) {
       return sendres(
         400,
         { message: "User with the same email already exist" },

@@ -81,7 +81,7 @@ const update = async (req, res) => {
       ).exec();
       if (member) {
         return sendres(
-          200,
+          201,
           {
             message: `Non Profit organization with name ${name} successfully updated`,
           },
@@ -120,6 +120,7 @@ const add = async (req, res) => {
         201,
         {
           message: `Non Profit organization successfully created`,
+          member,
         },
         res
       );

@@ -26,6 +26,7 @@ const add = async (req, res) => {
         201,
         {
           message: `Non Profit organization successfully created`,
+          member,
         },
         res
       );
