@@ -59,7 +59,11 @@ const update = async (req, res) => {
           res
         );
       }
-      return sendres(400, { message: "Ngo with same name not found" }, res);
+      return sendres(
+        400,
+        { message: `Non profit with name ${name} does not exist` },
+        res
+      );
     }
   } catch (err) {
     handleError(err, res);
@@ -79,7 +83,7 @@ const remove = async (req, res) => {
       }
       return sendres(
         400,
-        { message: `Non profit with name ${name} does not exist` },
+        { message: "Non Profit organization with this name is not registered" },
         res
       );
     }
