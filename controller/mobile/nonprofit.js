@@ -59,7 +59,7 @@ const update = async (req, res) => {
           res
         );
       }
-      return sendres(400, { message: "User not found" }, res);
+      return sendres(400, { message: "Ngo with same name not found" }, res);
     }
   } catch (err) {
     handleError(err, res);
