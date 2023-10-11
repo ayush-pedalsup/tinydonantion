@@ -87,7 +87,11 @@ const update = async (req, res) => {
           res
         );
       }
-      return sendres(400, { message: "Non profit with same name not found" }, res);
+      return sendres(
+        400,
+        { message: `Non profit with name ${name} does not exist` },
+        res
+      );
     }
   } catch (err) {
     handleError(err, res);

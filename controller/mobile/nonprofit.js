@@ -79,7 +79,7 @@ const remove = async (req, res) => {
       }
       return sendres(
         400,
-        { message: "Non Profit organization with this name is not registered" },
+        { message: `Non profit with name ${name} does not exist` },
         res
       );
     }
